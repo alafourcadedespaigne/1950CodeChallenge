@@ -1,13 +1,9 @@
 # 1950 Sotware Engineering Chanllenge
 
-# Solución al problema Marble Collection
+## Solución al problema Marble Collection
 
 La solución se encuentra publicada de manera  **publica**  en Github en el siguiente link [Marble Solution](https://github.com/alafourcadedespaigne/1950CodeChallenge).
-```sh
-<type>[optional scope]: <description>
-[optional body]
-[optional footer]
-```
+
 
 ### Detalles de la solución
 
