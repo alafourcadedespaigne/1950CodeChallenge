@@ -1,33 +1,34 @@
 # 1950 Sotware Engineering Chanllenge
 
-## Solución al problema Marble Collection
+## Solution to the Marble Collection problem
 
-La solución se encuentra publicada de manera  **publica**  en Github en el siguiente link [Marble Solution](https://github.com/alafourcadedespaigne/1950CodeChallenge).
+The solution is  published on Github at the following link [Marble Solution](https://github.com/alafourcadedespaigne/1950CodeChallenge).
 
 
-### Detalles de la solución
+### Solution Details
 
-La **solución** se encarga de resolver el problema planteado en el Code Challenge. Para ello se apoya en las bondades de Java en su versión 8+ Tales como: **Stream, Comparable, Comparator**.
-Los **método más significativos** son los siguientes:
+The **solution** is responsible for solving the problem raised in the Code Challenge. To do this, it relies on the benefits of Java in its version 8+ Such as: **Stream, Comparable, Comparator**.
+The **most significant** methods are as follows:
 
-**static boolean isPalindromeIgnoringCapitalizationAndPunctuation(String text)**  Este método haciendo uso de expresiones regulares dado una cadena , retorna verdadero o falso si dicha cadena es palíndrome, ignorando la capitalización y los signos de puntuación.
+**static boolean isPalindromeIgnoringCapitalizationAndPunctuation(String text)**  
+This method, using regular expressions given a string, returns true or false if the string is a palindrome, ignoring capitalization and punctuation.
 
-**static List<Marbles> orderedListOfMarbles(List<Marbles> exampleList)**  Este método haciendo uso de custom Comparator dado un listado de **Marbles** retorna una lista del mismo tipo pero ordenada por colores en el siguiente orden: **Red, Orange, Yellow, Green, Blue, Indigo, Violet (ROYGBIV).**
+**static List<Marbles> orderedListOfMarbles(List<Marbles> exampleList)** This method using custom Comparator given a list of **Marbles** returns a list of the same type but ordered by color in the following order: ** Red, Orange, Yellow, Green, Blue, Indigo, Violet (ROYGBIV).**
 
-### Información Extra
+### Extra information
 
-La complejidad del algoritmo es O(n).
+The complexity of the algorithm is O(n).
 
-Para el despliegue de la solución podemos hacer uso de una estrategia A/B Deployment o Blue Green, la cual nos va a permitir tener dos ambientes de producción paralelos (Blue & Green) en el cual se despliegan las nuevas versiones del aplicativo en este caso el algoritmo de manera alternativa. Esto nos dará la ventaja de facilitar la realización de un rollback a la versión anterior, en caso de que exista una falla en la nueva versión, simplemente ruteando al ambiente previo.
+For the deployment of the solution we can use an A/B Deployment or Blue Green strategy, which will allow us to have two parallel production environments (Blue & Green) in which the new versions of the application are deployed in this case the algorithm alternatively. This will give us the advantage of facilitating a rollback to the previous version, in case there is a failure in the new version, simply by routing to the previous environment.
 
-El Algoritmo puede ser desplegado en Amazon Web Services **(AWS)** , haciendo uso de serverless . Esto me da muchas ventajas ya que no me tendría que preocupar por nada relacionado con la infraestructura necesaria para hacer público mi algoritmo sino que el mismo AWS se encarga.
-Para el caso de este algoritmo la solución sería BaaS , osea , Backend como servicio; donde me apoyaré en los servicios de **Api Gateway**  y **AWS lambda** de la nube de Amazon para construir finalmente un Api REST sin servidor.
+The Algorithm can be deployed on Amazon Web Services **(AWS)** , making use of serverless . This gives me many advantages since I would not have to worry about anything related to the infrastructure necessary to make my algorithm public, AWS itself takes care of it.
+In the case of this algorithm, the solution would be BaaS, that is, Backend as a service; where I will rely on the **Api Gateway** and **AWS lambda** services of the Amazon cloud to finally build a serverless REST API.
 
-La relacion entre los componentes que dan vida al API Rest que mostrará mi algoritmo sería la siguiente.
+The relationship between the components that give life to the Rest API that my algorithm will show would be the following.
 
-- AWS Lambda: Es donde se implementará el código de nuestro algoritmo. Debido a que las lambdas en AWS se manejan bajo el esquema FaaS o Función como Servicio, entonces crearemos una lambda para cada función. Por tal motivos dividimos nuestra aplicación en varias funciones granulares (**isPalindromeIgnoringCapitalizationAndPunctuation, orderedListOfMarbles, etc...** )
-- Api Gateway: Es el componente que usaremos para vincular una solicitud a una función implementada. Entonces, cuando llega esa solicitud en particular, se invoca la función. Esto lo manejamos de esta manera porque las lambdas están basadas en eventos y un evento puede ser una peticion HTTP a nuestra API REST
+- AWS Lambda: It is where the code of our algorithm will be implemented. Since lambdas in AWS are managed under the FaaS or Function as a Service scheme, so we will create a lambda for each function. For this reason we split our application into several granular functions (**isPalindromeIgnoringCapitalizationAndPunctuation, orderedListOfMarbles, etc...** )
+- Api Gateway: It is the component that we will use to link a request to an implemented function. So when that particular request comes in, the function is called. We handle this this way because lambdas are event based and an event can be an HTTP request to our REST API
 
-Para la automatización y el despliegue podemos hacer uso de las GitHub Actions, ya que nuestro código esta alojado en Github. Las GitHub Actions, ofrecen capacidades nativas directamente en el flujo de GitHub y podemos automatizar que una vez realizado un push a nuestra rama master en Github se dispare una acción que posibilite mediante la integración de Github con **CodeDeploy** automatizar el despliegue de nuestra lambda(s) en la nube de amazon.
+For automation and deployment we can make use of GitHub Actions, since our code is hosted on Github. GitHub Actions offer native capabilities directly in the GitHub flow and we can automate that once a push has been made to our master branch in Github, an action is triggered that makes it possible, through the integration of Github with **CodeDeploy**, to automate the deployment of our lambda(s) in the amazon cloud.
 
-En el caso de que el orden de los datos sea de millones de registros a procesar , no es recomendable utilizar la memoria para ello por lo que lo más conveniente seria alguna herramienta de procesamiento de grandes cantidades de datos (Big Data Tools), en este caso podemos trabajar con Apache Spark ya que está especialmente diseñado para el procesamiento de grandes volumenes de datos.
+In the event that the order of the data is of millions of records to be processed, it is not advisable to use the memory for it, so the most convenient would be some tool for processing large amounts of data (Big Data Tools), in this case case we can work with Apache Spark since it is specially designed for processing large volumes of data.

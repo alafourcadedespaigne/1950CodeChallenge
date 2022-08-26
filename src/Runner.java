@@ -8,7 +8,6 @@ public class Runner {
 
 
     /**
-     *
      * @return
      */
     private static List<Marbles> exampleSubsetOfBobMarbles() {
@@ -36,7 +35,6 @@ public class Runner {
     static List<Marbles> orderedListOfMarbles(List<Marbles> exampleList) {
 
 
-
         List<Marbles> resultList = exampleList;
         List<String> definedOrder = // define your custom order
                 Arrays.asList("red", "orange", "yellow", "green", "blue", "indigo", "violet");
@@ -51,25 +49,22 @@ public class Runner {
 
     public static void main(String[] args) {
 
-        boolean a = isPalindromeIgnoringCapitalizationAndPunctuation("Bob Dad-Bob");
-
-        // Cargar la data de ejemplo proporcionada en el documento
+        // Load the sample data provided in the document
         List<Marbles> itemsInit = exampleSubsetOfBobMarbles();
 
-        // Se retorna la misma lista filtrada por las siguientes reglas.
-        // 1 - Solo los que tengan peso mayor igual a 0.5
-        // 2- Solo los que contengan Nombre palíndrome
+        //The same list is returned filtered by the following rules.
+        // 1- Only those with a weight greater than 0.5
+        // 2- Only those containing Name palindrome
         itemsInit = itemsInit.stream().filter((item)
-                -> item.getWeight() >= 0.5 && isPalindromeIgnoringCapitalizationAndPunctuation(item.getName()))
+                        -> item.getWeight() >= 0.5 && isPalindromeIgnoringCapitalizationAndPunctuation(item.getName()))
                 .collect(Collectors.toList());
 
 
-
-        // Una vez filtrada la lista se ordena por colores en el siguiente orden (ROYGBIV)
+        // Once filtered, the list is sorted by colors in the following order (ROYGBIV)
         itemsInit = orderedListOfMarbles(itemsInit);
 
-        // Se imprime por pantalla  finalmente la lista resultante una vez aplicadas
-        // las reglas descritas en el enunciado del problema
+        //Finally, the resulting list is printed on the screen once applied
+        //the rules described in the statement of the problem
         for (Marbles item : itemsInit) {
             System.out.println(item.getColor() + "->" + item.getWeight());
         }

@@ -1,3 +1,6 @@
+/**
+ * Class that represents a Marbles entity
+ */
 public class Marbles implements Comparable<Marbles>{
 
     private Integer id;
